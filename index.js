@@ -1,18 +1,43 @@
+require('dotenv').config();
 const Discord = require('discord.js');
-
+const fs = require('fs');
+const { command } = require('./Commands/hello');
 const Client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES","DIRECT_MESSAGES","GUILD_MESSAGE_REACTIONS"]});
 
-require('dotenv').config();
+
+const commands = {};
+
+const jsCommandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 
 
+jsCommandFiles.forEach(commandFile => {
+    const command = require(`./commands/${commandFile}`)
+    if(command.command && command.fn){
+        console.log(command.command)
+        commands[command.command] = command.fn
+    }
+})
 
+
+let prefix = "#"
 
 Client.once('ready', () => {
     console.log("I am online");
 })
 
 
+Client.on('message', async msg => {
+    if (msg.author.bot){return;}; //If the message that was posted, was posted by a bot return the function.
+    if(msg.content.startsWith(prefix)){
+        let args = msg.content.split(" ")
+        let command = args[0].substring(1,args[0].length)
+        if(commands[command]){
+            commands[command](msg)
 
+        }
+    }
+    
+})
 
 
 
