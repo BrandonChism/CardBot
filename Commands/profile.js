@@ -1,6 +1,6 @@
 module.exports = {
     command: "profile",
-    fn: (msg) => {
+    fn: async (msg) => {
 
         let args = msg.content.split(" ")
 
