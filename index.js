@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 const Client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES","DIRECT_MESSAGES","GUILD_MESSAGE_REACTIONS"]});
 
-
+require('dotenv').config();
 
 
 
@@ -16,4 +16,4 @@ Client.once('ready', () => {
 
 
 
-Client.login('ODkxMTA0NTQ3Mzk1NzYwMTI4.YU5fyA.3LdcV8zR7FP8PABvsC1vxkiSfxQ');
+Client.login(process.env.DISCORD_BOT_TOKEN);
