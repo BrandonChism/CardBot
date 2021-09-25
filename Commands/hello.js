@@ -1,6 +1,12 @@
 module.exports = {
-    command: "drop",
-    fn: (msg) => {
-        msg.reply("Hello!");
-    }
+    command: "hello",
+    fn: (args) => {
+        try{
+            msg.reply("Hello!");
+        }
+        catch(err)
+        {
+            console.log(err)
+        }
+    },
 }

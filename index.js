@@ -13,15 +13,14 @@ const jsCommandFiles = fs.readdirSync('./commands').filter(file => file.endsWith
 jsCommandFiles.forEach(commandFile => {
     const command = require(`./commands/${commandFile}`)
     if(command.command && command.fn){
-        console.log(command.command)
         commands[command.command] = command.fn
     }
 })
 
 
-let prefix = "#"
+let prefix = "!"
 
-Client.once('ready', () => {
+Client.once('ready', () => { 
     console.log("I am online");
 })
 
@@ -32,7 +31,17 @@ Client.on('message', async msg => {
         let args = msg.content.split(" ")
         let command = args[0].substring(1,args[0].length)
         if(commands[command]){
-            commands[command](msg)
+            try{
+                // if(!args[1]) throw "you must provide another argument";
+                // if(isNaN(args[1])) throw "you must provide a number";
+                console.log('trying command');
+                commands[command](msg)
+                return
+            }
+            catch (err){
+                msg.reply(err);
+                console.log(err);
+            }
 
         }
     }
