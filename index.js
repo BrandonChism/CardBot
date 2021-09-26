@@ -1,8 +1,13 @@
 require('dotenv').config();
+const { table } = require('console');
 const Discord = require('discord.js');
 const fs = require('fs');
 const { command } = require('./Commands/hello');
 const Client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES","DIRECT_MESSAGES","GUILD_MESSAGE_REACTIONS"]});
+
+
+
+
 
 
 const commands = {};
@@ -20,9 +25,14 @@ jsCommandFiles.forEach(commandFile => {
 
 let prefix = "!"
 
+
 Client.once('ready', () => { 
     console.log("I am online");
 })
+
+
+
+
 
 
 Client.on('message', async msg => {

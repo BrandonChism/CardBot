@@ -13,6 +13,15 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 const Dynamo = {
 
+
+
+    set: async(userId) => {
+
+
+
+        return docClient.set(params).promise();
+    },
+
     get: async(UserId) => {
         const params= {
             TableName: ''
